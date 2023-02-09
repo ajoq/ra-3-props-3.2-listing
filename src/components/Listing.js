@@ -1,9 +1,9 @@
 import ItemTitle from './ItemTitle';
 import ItemPrice from './ItemPrice';
 import ItemQuantity from './ItemQuantity';
+import PropTypes from 'prop-types';
 
 function Listing({ items }) {
-    console.log(items);
     const item = items.map(
         (item) =>
             item.state !== 'active' || (
@@ -32,7 +32,11 @@ function Listing({ items }) {
 }
 
 Listing.defaultProps = {
-    items: [],
+    case: [],
+};
+
+Listing.propTypes = {
+    Listing: PropTypes.array,
 };
 
 export default Listing;
