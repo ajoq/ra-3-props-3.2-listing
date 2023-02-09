@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ra-3-props-3.2-listing/static/css/main.180d2d81.css",
-    "main.js": "/ra-3-props-3.2-listing/static/js/main.5968e890.js",
+    "main.js": "/ra-3-props-3.2-listing/static/js/main.6798eb1f.js",
     "index.html": "/ra-3-props-3.2-listing/index.html",
     "main.180d2d81.css.map": "/ra-3-props-3.2-listing/static/css/main.180d2d81.css.map",
-    "main.5968e890.js.map": "/ra-3-props-3.2-listing/static/js/main.5968e890.js.map"
+    "main.6798eb1f.js.map": "/ra-3-props-3.2-listing/static/js/main.6798eb1f.js.map"
   },
   "entrypoints": [
     "static/css/main.180d2d81.css",
-    "static/js/main.5968e890.js"
+    "static/js/main.6798eb1f.js"
   ]
 }
