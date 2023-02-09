@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+GH pages: https://ajoq.github.io/ra-3-props-3.2-listing
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Список предложений
 
-## Available Scripts
+Необходимо вывести список предложений каталога Etsy.com, используя библиотеку React. После загрузки данных и отрисовки список должен выглядеть так:
+![Список предложений](./assets/preview.png)
 
-In the project directory, you can run:
+## Данные списка предложений
 
-### `npm start`
+Данные для списка доступны в формате JSON в каталоге `data`. Вам нужно их скопировать и хранить в виде константы в переменной. Для создания JS-объектов используйте `JSON.parse`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Это _массив объектов_, каждый _объект_ представляет одно предложение. У предложения доступно множество свойств, но в приложении необходимо использовать следующие:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-   `listing_id` — уникальный идентификатор предложения, _число_;
+-   `url` — ссылка на предложение, _строка_;
+-   `MainImage` — информация об изображении, _объект_, нам необходимо использовать свойство `url_570xN` для получения адреса главной картинки, _строка_;
+-   `title` — название предложения, _строка_;
+-   `currency_code` — код валюты, _строка_;
+-   `price` — цена, _строка_;
+-   `quantity` — доступное количество, _число_.
 
-### `npm test`
+## Описание компонента
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Для отображения списка создайте компонент `Listing`, который принимает следующие атрибуты:
 
-### `npm run build`
+-   `items` — список предложений, _массив объектов_, по умолчанию пустой массив.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Компонент должен создавать на основе списка предложений следующий HTML-код:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```html
+<div class="item-list">
+    <div class="item">
+        <div class="item-image">
+            <a href="https://www.etsy.com/listing/292754135/woodland-fairy">
+                <img
+                    src="https://img1.etsystatic.com/156/0/12814579/il_570xN.1173240751_50hv.jpg"
+                />
+            </a>
+        </div>
+        <div class="item-details">
+            <p class="item-title">Woodland Fairy</p>
+            <p class="item-price">$3.99</p>
+            <p class="item-quantity level-medium">12 left</p>
+        </div>
+    </div>
+</div>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Если название предложения превышает `50` символов, то необходимо выводить только первые `50` символов, и добавлять символ `…` в конце.
 
-### `npm run eject`
+При выводе стоимости предложения необходимо учитывать валюту. Если цена задана:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-   в долларах США, код `USD`, то цену вывести в формате `$50.00`;
+-   в евро, код `EUR`, то цену вывести в формате `€50.00`;
+-   в остальных случаях цену вывести в формате `50.00 GBP`, где `GBP` — код валюты.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Вывести остаток, подсветив его в зависимости от количества, используя класс `level-*`:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-   `level-low` — если остаток меньше `10` включительно;
+-   `level-medium` — если остаток меньше `20` включительно;
+-   `level-high` — если остаток больше `20`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Реализация
 
-## Learn More
+Необходимо отобразить данные списка предложений, используя компонент `Listing`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Используйте приложенный CSS-файл для стилизации.
